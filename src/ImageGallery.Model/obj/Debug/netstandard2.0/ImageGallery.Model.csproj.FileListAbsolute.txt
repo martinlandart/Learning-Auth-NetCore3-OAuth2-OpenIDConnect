@@ -1,9 +1,0 @@
-C:\Users\Martin\Documents\Workspace\NetCoreSecurityOpenIDConnect\src\ImageGallery.Model\bin\Debug\netstandard2.0\ImageGallery.Model.deps.json
-C:\Users\Martin\Documents\Workspace\NetCoreSecurityOpenIDConnect\src\ImageGallery.Model\bin\Debug\netstandard2.0\ImageGallery.Model.dll
-C:\Users\Martin\Documents\Workspace\NetCoreSecurityOpenIDConnect\src\ImageGallery.Model\bin\Debug\netstandard2.0\ImageGallery.Model.pdb
-C:\Users\Martin\Documents\Workspace\NetCoreSecurityOpenIDConnect\src\ImageGallery.Model\obj\Debug\netstandard2.0\ImageGallery.Model.csprojAssemblyReference.cache
-C:\Users\Martin\Documents\Workspace\NetCoreSecurityOpenIDConnect\src\ImageGallery.Model\obj\Debug\netstandard2.0\ImageGallery.Model.csproj.CoreCompileInputs.cache
-C:\Users\Martin\Documents\Workspace\NetCoreSecurityOpenIDConnect\src\ImageGallery.Model\obj\Debug\netstandard2.0\ImageGallery.Model.AssemblyInfoInputs.cache
-C:\Users\Martin\Documents\Workspace\NetCoreSecurityOpenIDConnect\src\ImageGallery.Model\obj\Debug\netstandard2.0\ImageGallery.Model.AssemblyInfo.cs
-C:\Users\Martin\Documents\Workspace\NetCoreSecurityOpenIDConnect\src\ImageGallery.Model\obj\Debug\netstandard2.0\ImageGallery.Model.dll
-C:\Users\Martin\Documents\Workspace\NetCoreSecurityOpenIDConnect\src\ImageGallery.Model\obj\Debug\netstandard2.0\ImageGallery.Model.pdb
