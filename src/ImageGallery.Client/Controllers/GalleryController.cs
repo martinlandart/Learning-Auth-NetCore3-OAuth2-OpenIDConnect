@@ -1,4 +1,5 @@
-﻿using ImageGallery.Client.ViewModels;
+﻿using IdentityModel.Client;
+using ImageGallery.Client.ViewModels;
 using ImageGallery.Model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -180,6 +181,36 @@ namespace ImageGallery.Client.Controllers
             response.EnsureSuccessStatusCode();
 
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> OrderFrame()
+        {
+            var idpClient = _httpClientFactory.CreateClient("IDPClient");
+
+            var metadataResponse = await idpClient.GetDiscoveryDocumentAsync();
+
+            if (metadataResponse.IsError)
+            {
+                throw new Exception("Problem accessing the discovery endpoint.", metadataResponse.Exception);
+            }
+
+            var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+
+            var userInfoResponse = await idpClient.GetUserInfoAsync(
+                new UserInfoRequest
+                {
+                    Address = metadataResponse.UserInfoEndpoint,
+                    Token = accessToken
+                });
+
+            if (userInfoResponse.IsError)
+            {
+                throw new Exception("Problem accessing the UserInfo endpoint.", userInfoResponse.Exception);
+            }
+
+            var address = userInfoResponse.Claims.FirstOrDefault(c => c.Type == "address")?.Value;
+
+            return View(new OrderFrameViewModel(address));
         }
 
         public async Task WriteOutIdentityInformation()
