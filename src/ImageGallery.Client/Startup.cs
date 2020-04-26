@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Net.Http.Headers;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using IdentityModel;
 
 namespace ImageGallery.Client
 {
@@ -49,7 +50,10 @@ namespace ImageGallery.Client
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
             })
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => 
+            {
+                options.AccessDeniedPath = "/Authorization/AccessDenied"; // Define default access denied page action
+            })
             .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
             {
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -57,13 +61,20 @@ namespace ImageGallery.Client
                 options.ClientId = "imagegalleryclient";
                 options.ResponseType = "code";
                 options.Scope.Add("address");
+                options.Scope.Add("roles");
                 options.ClaimActions.DeleteClaim("sid"); // Default claim
                 options.ClaimActions.DeleteClaim("idp"); // Default claim
                 options.ClaimActions.DeleteClaim("s_hash"); // Default claim
                 options.ClaimActions.DeleteClaim("auth_time"); // Default claim
+                options.ClaimActions.MapUniqueJsonKey("role", "role"); // First param is claim type returned from IDP, second is claim type in our claims identity
                 options.SaveTokens = true;
                 options.ClientSecret = "secret";
                 options.GetClaimsFromUserInfoEndpoint = true;
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    NameClaimType = JwtClaimTypes.GivenName,
+                    RoleClaimType = JwtClaimTypes.Role
+                };
             });
         }
 

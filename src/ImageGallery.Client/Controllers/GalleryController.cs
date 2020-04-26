@@ -183,6 +183,8 @@ namespace ImageGallery.Client.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [Authorize(Roles = "PayingUser")] // To define multiple roles, separate by commas: "PayingUser, abc, def"
         public async Task<IActionResult> OrderFrame()
         {
             var idpClient = _httpClientFactory.CreateClient("IDPClient");
